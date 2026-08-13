@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: workflow_dispatch
 defaults:
   run:
-    shell: /bin/bash
+    shell: bash
 jobs:
   Explore-GitHub-Actions:
     strategy:

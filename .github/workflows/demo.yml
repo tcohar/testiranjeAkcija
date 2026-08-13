@@ -24,7 +24,8 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - run: echo "Secret is $TAJNA"
+      - run: echo "Secret is $TAJNA, variable is $PRVA"
       - run: echo "🍏 This job's status is ${{ job.status }} while running on ${{ matrix.os }}."
     env:
       TAJNA: ${{ secrets.TAJNA }}
+      PRVA: ${{ vars.PRVA }}

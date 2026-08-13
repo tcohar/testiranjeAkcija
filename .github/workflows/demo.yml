@@ -15,7 +15,6 @@ jobs:
         shell: bash
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-        background: true
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
@@ -25,4 +24,5 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+      - run: echo "Secret is ${{secrets.TAJNA}}"
       - run: echo "🍏 This job's status is ${{ job.status }} while running on ${{ matrix.os }}."

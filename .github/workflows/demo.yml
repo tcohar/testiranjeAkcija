@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     defaults:
       run:
-        shell: /bin/bash
+        shell: bash
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
         background: true

@@ -1,6 +1,6 @@
 name: "helou"
-arch: "amd64"
-platform: "linux"
+arch: ${GOARCH}
+platform: ${GOOS}
 version: "0.9.0"
 section: "default"
 maintainer: "Tom <tomislav.cohar@gmail.com>"

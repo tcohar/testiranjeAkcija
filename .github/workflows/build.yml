@@ -19,15 +19,27 @@ jobs:
       
       - run: go build -o helou -v .
 
-      - run: echo "${{toJson(matrix)}}" > ghMatrix
-      - run: echo "${{toJson(runner)}}" > ghRunner
+      - name: Download and install nfpm (x64)
+        run: |
+          wget -nv "https://github.com/goreleaser/nfpm/releases/download/v2.47.0/nfpm_2.47.0_amd64.deb"
+          dpkg -i nfpm_2.47.0_amd64.deb
+        if: runner.arch == 'X64'
+
+      - name: Download and install nfpm (arm64)
+        run: |
+          wget -nv "https://github.com/goreleaser/nfpm/releases/download/v2.47.0/nfpm_2.47.0_arm64.deb"
+          dpkg -i nfpm_2.47.0_arm64.deb
+        if: runner.arch == 'ARM64'  
+
+      - name: Create DEB package
+        id: deb-create
+        run: nfpm package -p deb
+
+      - name: Create RPM package
+        id: rpm-create
+        run: nfpm package -p rpm
 
       - uses: actions/upload-artifact@v7
         with:
-          path: ghMatrix
-          archive: false
-
-      - uses: actions/upload-artifact@v7
-        with:
-          path: ghRunner
+          path: helou
           archive: false

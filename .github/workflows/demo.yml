@@ -26,6 +26,11 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "Secret is $TAJNA, variable is $PRVA"
       - run: echo "🍏 This job's status is ${{ job.status }} while running on ${{ matrix.os }}."
+      - run: echo "${{ toJson(github) }}" > ghFile
+      - uses: actions/upload-artifact@v7
+        with:
+          path: ghFile
+          archive: false
     env:
       TAJNA: ${{ secrets.TAJNA }}
       PRVA: ${{ vars.PRVA }}

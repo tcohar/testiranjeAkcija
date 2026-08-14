@@ -21,14 +21,14 @@ jobs:
 
       - name: Create deb package
         id: nfpm-deb
-        uses: blinktag/nfpm@v2.27.1
+        uses: blinktag/nfpm@main
         with:
           config: "nfpm.yaml"
           packager: "deb"
       
       - name: Create rpm package
         id: nfpm-rpm
-        uses: blinktag/nfpm@v2.27.1
+        uses: blinktag/nfpm@main
         with:
           config: "nfpm.yaml"
           packager: "rpm"

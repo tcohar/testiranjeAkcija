@@ -19,33 +19,5 @@ jobs:
       
       - run: go build -o helou -v .
 
-      - name: Create deb package
-        id: nfpm-deb
-        uses: blinktag/nfpm@main
-        with:
-          config: "nfpm.yaml"
-          packager: "deb"
-      
-      - name: Create rpm package
-        id: nfpm-rpm
-        uses: blinktag/nfpm@main
-        with:
-          config: "nfpm.yaml"
-          packager: "rpm"
-      
-      - name: Upload deb
-        uses: actions/upload-artifact@v7
-        with:
-          path: ${{ steps.nfpm-deb.outputs.package }}
-          archive: false
-
-      - name: Upload rpm
-        uses: actions/upload-artifact@v7
-        with:
-          path: ${{ steps.nfpm-rpm.outputs.package }}
-          archive: false
-          
-      - uses: actions/upload-artifact@v7
-        with:
-          path: helou
-          archive: false
+      - name: Download nfpm
+        run: wget "https://github.com/goreleaser/nfpm/releases/download/v2.47.0/nfpm_2.47.0_$(arch).deb"

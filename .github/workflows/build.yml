@@ -19,15 +19,15 @@ jobs:
       
       - run: go build -o helou -v .
 
-      - run: echo "${{toJson(github)}}" > ghGh
-      - run: echo "${{toJson(env)}}" > ghEnv
+      - run: echo "${{toJson(matrix)}}" > ghMatrix
+      - run: echo "${{toJson(runner)}}" > ghRunner
 
       - uses: actions/upload-artifact@v7
         with:
-          path: ghEnv
+          path: ghMatrix
           archive: false
 
       - uses: actions/upload-artifact@v7
         with:
-          path: ghGh
+          path: ghRunner
           archive: false

@@ -1,0 +1,28 @@
+name: "helou"
+arch: "amd64"
+platform: "linux"
+version: "0.9.0"
+section: "default"
+maintainer: "Tom <tomislav.cohar@gmail.com>"
+description: |
+  Helou packaged
+vendor: "Novendor"
+homepage: "https://github.com/tcohar/testiranjeAkcija"
+license: "GPLv2"
+contents:
+  - src: ./helou
+    dst: /usr/bin/helou
+overrides:
+  deb:
+    depends:
+    - libayatana-appindicator3-1 (>= 0.5.92)
+    - libgtk-3-0 (>= 3.24.38)
+    - librsvg2-common (>= 2.54.7)
+  rpm:
+    depends:
+    - libgtk-3.so.0()(64bit)
+    - libayatana-appindicator3.so.1()(64bit)
+    - (libpixbufloader_svg.so()(64bit) or libpixbufloader-svg.so()(64bit))
+
+rpm:
+  buildhost: hideHost

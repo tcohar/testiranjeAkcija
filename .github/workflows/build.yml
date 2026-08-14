@@ -33,12 +33,26 @@ jobs:
 
       - name: Create DEB package
         id: deb-create
-        run: nfpm package -p deb | grep "created package" | sed 's/created package: /path=/g' >> $GITHUB_OUTPUT
+        run: |
+          PKG_PATH=$(nfpm package -p deb | grep "created package" | sed 's/created package: //g' | xargs)
+          echo "path=${PKG_PATH}" >> $GITHUB_OUTPUT
 
       - name: Create RPM package
         id: rpm-create
-        run: nfpm package -p deb | grep "created package" | sed 's/created package: /path=/g' >> $GITHUB_OUTPUT
+        run: |
+          PKG_PATH=$(nfpm package -p rpm | grep "created package" | sed 's/created package: //g' | xargs)
+          echo "path=${PKG_PATH}" >> $GITHUB_OUTPUT
 
+      - uses: actions/upload-artifact@v7
+        with:
+          path: ${{ steps.deb-create.outputs.path }}
+          archive: false
+      
+      - uses: actions/upload-artifact@v7
+        with:
+          path: ${{ steps.rpm-create.outputs.path }}
+          archive: false
+          
       - uses: actions/upload-artifact@v7
         with:
           path: helou

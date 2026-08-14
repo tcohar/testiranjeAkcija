@@ -21,19 +21,17 @@ jobs:
 
       - name: Create deb package
         id: nfpm-deb
-        uses: burningalchemist/action-gh-nfpm@v1
+        uses: blinktag/nfpm@v2.27.1
         with:
-          packager: deb
-          config: nfpm.yaml
-          nfpm_version: 2.47.0
+          config: "nfpm.yaml"
+          packager: "deb"
       
       - name: Create rpm package
         id: nfpm-rpm
-        uses: burningalchemist/action-gh-nfpm@v1
+        uses: blinktag/nfpm@v2.27.1
         with:
-          packager: rpm
-          config: nfpm.yaml
-          nfpm_version: 2.47.0
+          config: "nfpm.yaml"
+          packager: "rpm"
       
       - name: Upload deb
         uses: actions/upload-artifact@v7

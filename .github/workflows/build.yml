@@ -7,7 +7,7 @@ jobs:
   Build:
     strategy:
       matrix:
-        os: [ubuntu-22.04, ubuntu-22.04-arm]
+        os: [ubuntu-22.04-arm]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check out repository code
@@ -19,5 +19,15 @@ jobs:
       
       - run: go build -o helou -v .
 
-      - name: Download nfpm
-        run: wget "https://github.com/goreleaser/nfpm/releases/download/v2.47.0/nfpm_2.47.0_$(arch).deb"
+      - run: echo "${{toJson(github)}}" > ghGh
+      - run: echo "${{toJson(env)}}" > ghEnv
+
+      - uses: actions/upload-artifact@v7
+        with:
+          path: ghEnv
+          archive: false
+
+      - uses: actions/upload-artifact@v7
+        with:
+          path: ghGh
+          archive: false

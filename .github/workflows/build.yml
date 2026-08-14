@@ -33,11 +33,11 @@ jobs:
 
       - name: Create DEB package
         id: deb-create
-        run: nfpm package -p deb
+        run: nfpm package -p deb | grep "created package" | sed s/"created package: "/"path="/g >> $GITHUB_OUTPUT
 
       - name: Create RPM package
         id: rpm-create
-        run: nfpm package -p rpm
+        run: nfpm package -p deb | grep "created package" | sed s/"created package: "/"path="/g >> $GITHUB_OUTPUT
 
       - uses: actions/upload-artifact@v7
         with:

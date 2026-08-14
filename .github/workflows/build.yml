@@ -18,7 +18,35 @@ jobs:
           go-version: '1.26'  
       
       - run: go build -o helou -v .
+
+      - name: Create deb package
+        id: nfpm-deb
+        uses: burningalchemist/action-gh-nfpm@v1
+        with:
+          packager: deb
+          config: nfpm.yaml
+          nfpm_version: 2.47.0
       
+      - name: Create rpm package
+        id: nfpm-rpm
+        uses: burningalchemist/action-gh-nfpm@v1
+        with:
+          packager: rpm
+          config: nfpm.yaml
+          nfpm_version: 2.47.0
+      
+      - name: Upload deb
+        uses: actions/upload-artifact@v7
+        with:
+          path: ${{ steps.nfpm-deb.outputs.package }}
+          archive: false
+
+      - name: Upload rpm
+        uses: actions/upload-artifact@v7
+        with:
+          path: ${{ steps.nfpm-rpm.outputs.package }}
+          archive: false
+          
       - uses: actions/upload-artifact@v7
         with:
           path: helou

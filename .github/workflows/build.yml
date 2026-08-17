@@ -34,14 +34,14 @@ jobs:
       - name: Create DEB package
         id: deb-create
         run: |
-          PKG_PATH=$(nfpm package -p deb | grep "created package" | sed 's/created package: //g' | xargs)
+          PKG_PATH=$(nfpm package -p deb | grep "created package" | sed 's/created package: //g')
           echo "path=${PKG_PATH}"
           echo "path=${PKG_PATH}" >> $GITHUB_OUTPUT
 
       - name: Create RPM package
         id: rpm-create
         run: |
-          PKG_PATH=$(nfpm package -p rpm | grep "created package" | sed 's/created package: //g' | xargs)
+          PKG_PATH=$(nfpm package -p rpm | grep "created package" | sed 's/created package: //g')
           echo "path=${PKG_PATH}"
           echo "path=${PKG_PATH}" >> $GITHUB_OUTPUT
 

@@ -34,18 +34,20 @@ jobs:
       - name: Create DEB package
         id: deb-create
         run: |
-          export GOARCH=${{ case( runner.arch == 'ARM64', 'arm64', 'amd64') }}
           PKG_PATH=$(nfpm package -p deb | grep "created package" | sed 's/created package: //g')
           echo "path=${PKG_PATH}"
           echo "path=${PKG_PATH}" >> $GITHUB_OUTPUT
+        env:
+          GOARCH: ${{ case( runner.arch == 'ARM64', 'arm64', 'amd64') }}
 
       - name: Create RPM package
         id: rpm-create
         run: |
-          export GOARCH=${{ case( runner.arch == 'ARM64', 'arm64', 'amd64') }}
           PKG_PATH=$(nfpm package -p rpm | grep "created package" | sed 's/created package: //g')
           echo "path=${PKG_PATH}"
           echo "path=${PKG_PATH}" >> $GITHUB_OUTPUT
+        env:
+          GOARCH: ${{ case( runner.arch == 'ARM64', 'arm64', 'amd64') }}
 
       - uses: actions/upload-artifact@v7
         with:

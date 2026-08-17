@@ -15,7 +15,7 @@ jobs:
 
       - uses: actions/setup-go@v7
         with:
-          go-version: '1.26'  
+          go-version: '1.26'
 
       - run: go build -o helou -v .
 
@@ -29,7 +29,7 @@ jobs:
         run: |
           wget -nv "https://github.com/goreleaser/nfpm/releases/download/v2.47.0/nfpm_2.47.0_arm64.deb"
           sudo dpkg -i nfpm_2.47.0_arm64.deb
-        if: runner.arch == 'ARM64'  
+        if: runner.arch == 'ARM64'
 
       - name: Create DEB package
         id: deb-create

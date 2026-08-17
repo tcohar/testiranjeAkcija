@@ -12,11 +12,11 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v7
-      
+
       - uses: actions/setup-go@v7
         with:
           go-version: '1.26'  
-      
+
       - run: go build -o helou -v .
 
       - name: Download and install nfpm (x64)
@@ -53,12 +53,12 @@ jobs:
         with:
           path: ${{ steps.deb-create.outputs.path }}
           archive: false
-      
+
       - uses: actions/upload-artifact@v7
         with:
           path: ${{ steps.rpm-create.outputs.path }}
           archive: false
-          
+
       - uses: actions/upload-artifact@v7
         with:
           path: helou
